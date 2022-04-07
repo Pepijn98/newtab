@@ -46,13 +46,12 @@
                     <!-- Search box -->
                     <div class="tile is-parent">
                         <article class="search-box tile is-child box">
-                            <form action="https://www.google.com/search" method="get" target="_blank" autocomplete="off">
-                                <!-- Disble chrome's autocomplete and autofill -->
-                                <input autocomplete="false" name="hidden" type="text" style="display:none;">
-
-                                <!-- https://www.w3schools.com/howto/howto_js_autocomplete.asp -->
+                            <form action="https://www.google.com/search" method="get" target="_blank"
+                                autocomplete="off">
                                 <div class="autocomplete">
-                                    <input id="search" type="text" name="q" placeholder="Search...">
+                                    <input list="suggestions" id="search" type="text" name="q" placeholder="Search...">
+                                    <button id="clear" type="reset">&times;</button>
+                                    <datalist id="suggestions"></datalist>
                                 </div>
                             </form>
                         </article>
@@ -109,7 +108,8 @@
                         <div class="tile is-parent">
                             <article id="anilist" class="bookmark tile is-child box">
                                 <button type="button" id="anilist-btn">
-                                    <img title="AL" height="50px" width="50px" src="https://anilist.co/img/icons/icon.svg" />
+                                    <img title="AL" height="50px" width="50px"
+                                        src="https://anilist.co/img/icons/icon.svg" />
                                 </button>
                             </article>
                         </div>
@@ -148,7 +148,8 @@
                         <div class="tile is-parent">
                             <article id="nvidia" class="bookmark tile is-child box">
                                 <button type="button" type="button" id="nvidia-btn">
-                                    <img title="NV" height="50px" width="50px" src="https://b.catgirlsare.sexy/U6AAmkN8.svg" />
+                                    <img title="NV" height="50px" width="50px"
+                                        src="https://b.catgirlsare.sexy/U6AAmkN8.svg" />
                                 </button>
                             </article>
                         </div>
@@ -157,6 +158,7 @@
             </div>
         </div>
     </section>
+    <script async type="text/javascript" src="js/.env.js"></script>
     <script async type="text/javascript" src="js/style.js"></script>
     <script async type="text/javascript" src="js/dateTime.js"></script>
     <script async type="text/javascript" src="js/onClick.js"></script>
