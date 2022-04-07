@@ -60,7 +60,7 @@ input {
 
 #kyra {
     min-height: 768px;
-    background: url("assets/image.jpg") no-repeat;
+    background: url("assets/image.jpg") no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
