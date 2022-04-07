@@ -46,7 +46,10 @@
                     <!-- Search box -->
                     <div class="tile is-parent">
                         <article class="search-box tile is-child box">
-                            <form action="https://www.google.com/search" method="get" target="_blank" autocomplete="on">
+                            <form action="https://www.google.com/search" method="get" target="_blank" autocomplete="off">
+                                <!-- Disble chrome's autocomplete and autofill -->
+                                <input autocomplete="false" name="hidden" type="text" style="display:none;">
+
                                 <!-- https://www.w3schools.com/howto/howto_js_autocomplete.asp -->
                                 <div class="autocomplete">
                                     <input id="search" type="text" name="q" placeholder="Search...">
