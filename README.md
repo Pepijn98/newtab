@@ -7,7 +7,7 @@ Inspired by [Styleads/homless](https://github.com/Styleads/homless), took their 
 Feel free to clone, fork and modify however you want.
 
 ## Install
-To install this as an extension, go to the extension page of whatever chromium browser you have an load unpacked extension.
+To install this as an extension, go to the extension page of whatever chromium browser you have and load unpacked extension.
 
 ## TODO
 - Small backend for google search suggestions.
