@@ -1,7 +1,7 @@
 html {
     height: 100%;
     font-family: 'Ubuntu', 'Cantarell', 'monospace';
-    background: url("assets/background.jpg") no-repeat center center fixed;
+    background: url("../assets/background.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -101,7 +101,7 @@ form button {
 
 #kyra {
     min-height: 768px;
-    background: url("assets/image.jpg") no-repeat center;
+    background: url("../assets/image.jpg") no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
