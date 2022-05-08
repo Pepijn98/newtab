@@ -1,5 +1,5 @@
 # Kyra
-A clean personal new tab page (chromium browerser only excluding opera)
+A clean personal new tab page (chromium browsers only excluding opera)
 
 ## About
 A simplistic new tab page with my most used bookmarks. \
