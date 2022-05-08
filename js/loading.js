@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
     let overlay = document.getElementById("overlay");
     overlay.style.opacity = 0;
     setTimeout(function () {

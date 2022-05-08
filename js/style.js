@@ -1,4 +1,4 @@
-(() => {
+window.addEventListener("DOMContentLoaded", () => {
     let body = document.getElementsByTagName("body")[0];
     let section = document.getElementById("section");
     if (body.scrollHeight > body.clientHeight) {
@@ -9,4 +9,4 @@
         section.style.alignItems = "center";
         section.style.height = "100%";
     }
-})();
+});

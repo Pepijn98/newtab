@@ -29,13 +29,16 @@
 
         <!-- Make sure these are ready to go as fast as possible -->
         <link rel="preload" href="css/loading.css" as="style" />
+        <link rel="preload" href="css/main.css" as="style" />
         <link rel="preload" href="js/loading.js" as="script" />
         <link rel="preload" href="js/style.js" as="script" />
+        <link rel="preload" href="js/dateTime.js" as="script" />
 
         <!-- Styling -->
         <link rel="stylesheet" href="css/loading.css" />
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+        <link rel="stylesheet" href="css/libs/github-markdown-css/light.min.css" />
         <link rel="stylesheet" href="css/main.css" />
     </head>
 
@@ -63,20 +66,11 @@
                     </div>
 
                     <div class="tile is-vertical is-8">
-                        <!-- Search box -->
+                        <!-- Markdown editor -->
                         <div class="tile is-parent">
-                            <!-- <article class="search-box tile is-child box">
-                            <form action="https://www.google.com/search" method="get" target="_blank"
-                                autocomplete="off">
-                                <div class="autocomplete">
-                                    <input list="suggestions" id="search" type="text" name="q" placeholder="Search..." autofocus>
-                                    <button id="clear" type="reset">&times;</button>
-                                    <datalist id="suggestions"></datalist>
-                                </div>
-                            </form>
-                        </article> -->
                             <article class="notes tile is-child box">
-                                <textarea id="notes" class="notes__text" name="notes" disabled="true"></textarea>
+                                <div id="md-notes" class="notes__text-md markdown-body"></div>
+                                <textarea id="notes" class="notes__text" name="notes" style="display: none"></textarea>
                                 <button id="btn-save" class="notes__save" style="display: none">
                                     <i class="fa-solid fa-floppy-disk"></i>
                                 </button>
@@ -187,7 +181,8 @@
         </section>
         <script type="text/javascript" src="js/loading.js"></script>
         <script type="text/javascript" src="js/style.js"></script>
-        <script async type="text/javascript" src="js/.env.js"></script>
+        <script async type="text/javascript" src="js/libs/dompurify/purify.min.js"></script>
+        <script async type="text/javascript" src="js/libs/marked/marked.min.js"></script>
         <script async type="text/javascript" src="js/notes.js"></script>
         <script async type="text/javascript" src="js/dateTime.js"></script>
         <script async type="text/javascript" src="js/onClick.js"></script>
