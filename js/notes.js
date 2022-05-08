@@ -1,11 +1,11 @@
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
     const mdNotes = document.getElementById("md-notes");
     const notes = document.getElementById("notes");
     const btnEdit = document.getElementById("btn-edit");
     const btnSave = document.getElementById("btn-save");
 
     if (mdNotes && notes && btnEdit && btnSave) {
-        const md = localStorage.getItem("notes") || "";
+        const md = (await chrome.storage.local.get("notes"))?.notes ?? "";
         const html = marked.parse(md);
         const sanitized = DOMPurify.sanitize(html);
         mdNotes.innerHTML = sanitized;
@@ -24,8 +24,8 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        btnEdit.addEventListener("click", () => {
-            notes.value = localStorage.getItem("notes") || "";
+        btnEdit.addEventListener("click", async () => {
+            notes.value = (await chrome.storage.local.get("notes"))?.notes ?? "";
 
             notes.style.display = "";
             mdNotes.style.display = "none";
@@ -37,7 +37,9 @@ window.addEventListener("DOMContentLoaded", () => {
             const html = marked.parse(notes.value);
             const sanitized = DOMPurify.sanitize(html);
             mdNotes.innerHTML = sanitized;
+            
             localStorage.setItem("notes", notes.value);
+            chrome.storage.local.set({ notes: notes.value });
 
             notes.style.display = "none";
             mdNotes.style.display = "";
