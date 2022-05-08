@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     let overlay = document.getElementById("overlay");
     overlay.style.opacity = 0;
-      setTimeout(function () {
+    setTimeout(function () {
         overlay.style.display = "none";
-      }, 1200);
+    }, 1200);
 });
