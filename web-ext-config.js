@@ -1,10 +1,29 @@
 module.exports = {
-    ignoreFiles: ["example_data.md", "README.md", "dist", ".vscode", ".git", ".gitignore", "web-ext-config.js", ".env", "bin"],
-    artifactsDir: "dist",
+    ignoreFiles: [
+        ".git",
+        ".nuxt",
+        ".vscode",
+        "bin",
+        "node_modules",
+        "pages",
+        "pkg",
+        "public",
+        ".env",
+        ".gitignore",
+        ".npmrc",
+        "example_data.md",
+        "nuxt.config.ts",
+        "package.json",
+        "README.md",
+        "tsconfig.json",
+        "web-ext-config.js",
+        "yarn.lock"
+    ],
+    artifactsDir: "pkg",
     build: {
         overwriteDest: true
     },
     run: {
-        firefox: "firefoxdeveloperedition"
+        firefox: "firefox"
     }
 };

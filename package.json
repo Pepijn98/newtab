@@ -1,0 +1,19 @@
+{
+    "private": true,
+    "scripts": {
+        "build": "nuxt generate",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare"
+    },
+    "devDependencies": {
+        "nuxt": "^3.1.2"
+    },
+    "dependencies": {
+        "@element-plus/icons-vue": "^2.0.10",
+        "@element-plus/nuxt": "^1.0.3",
+        "element-plus": "^2.2.29",
+        "sass": "^1.58.0"
+    }
+}

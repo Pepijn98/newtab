@@ -1,3 +1,9 @@
-dist
 example_data.md
+node_modules
+*.log*
+.nuxt
+.nitro
+.cache
+.output
 .env
+dist

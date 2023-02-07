@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Kyra",
-    "version": "1.2.0",
+    "version": "2.0.0",
     "description": "A clean personal new tab page",
     "author": "Pepijn van den Broek",
     "homepage_url": "https://vdbroek.dev",
@@ -10,13 +10,20 @@
             "id": "{feb417a7-9bbe-43eb-b8ef-ce3df0c142c3}"
         }
     },
+    "// chrome_settings_overrides": {
+        "homepage": "dist/index.html"
+    },
     "chrome_url_overrides": {
-        "newtab": "index.html"
+        "newtab": "dist/index.html"
     },
-    "background": {
-        "scripts": ["js/libs/polyfill/browser-polyfill.min.js"]
+    "// background": {
+        "scripts": [
+            "js/libs/polyfill/browser-polyfill.min.js"
+        ]
     },
-    "permissions": ["storage"],
+    "permissions": [
+        "storage"
+    ],
     "icons": {
         "16": "icons/favicon-16x16.png",
         "32": "icons/favicon-32x32.png",
