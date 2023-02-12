@@ -1,0 +1,67 @@
+html,
+body,
+#__nuxt {
+    height: 100vh;
+    margin: 0px;
+    background: #1c1b22;
+}
+
+.markdown {
+    box-shadow: var(--el-box-shadow);
+    border: 1px solid rgba(0, 0, 0, .12);
+}
+
+.youtube {
+    box-shadow: 0px 0px 8px 4px rgba(255, 0, 0, .08);
+    border: 1px solid rgba(255, 0, 0, .12);
+}
+
+.twitch {
+    box-shadow: 0px 0px 8px 4px rgba(145, 71, 255, .08);
+    border: 1px solid rgba(145, 71, 255, .12);
+}
+
+.twitter {
+    box-shadow: 0px 0px 8px 4px rgba(8, 160, 233, .08);
+    border: 1px solid rgba(8, 160, 233, .12);
+}
+
+.reddit {
+    box-shadow: 0px 0px 8px 4px rgba(255, 69, 0, .08);
+    border: 1px solid rgba(255, 69, 0, .12);
+}
+
+.nyaa {
+    box-shadow: 0px 0px 8px 4px rgba(255, 183, 197, .08);
+    border: 1px solid rgba(255, 183, 197, .12);
+}
+
+.livechart {
+    box-shadow: 0px 0px 8px 4px rgba(59, 151, 252, .08);
+    border: 1px solid rgba(59, 151, 252, .12);
+}
+
+.anilist {
+    box-shadow: 0px 0px 8px 4px rgba(2, 169, 255, .08);
+    border: 1px solid rgba(2, 169, 255, .12);
+}
+
+.subsplease {
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, .16);
+    border: 1px solid rgba(0, 0, 0, .12);
+}
+
+.github {
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, .16);
+    border: 1px solid rgba(0, 0, 0, .12);
+}
+
+.stackoverflow {
+    box-shadow: 0px 0px 8px 4px rgba(239, 130, 54, .08);
+    border: 1px solid rgba(239, 130, 54, .12);
+}
+
+.dev {
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, .16);
+    border: 1px solid rgba(0, 0, 0, .12);
+}

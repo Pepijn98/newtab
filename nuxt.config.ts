@@ -8,7 +8,10 @@ export default defineNuxtConfig({
                 { name: "viewport", content: "width=device-width, initial-scale=1" },
                 { charset: "utf-8" }
             ],
-            link: [],
+            link: [
+                { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+                { rel: "stylesheet", href: "https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css" }
+            ],
             style: [],
             script: [],
             noscript: [
@@ -16,10 +19,17 @@ export default defineNuxtConfig({
             ]
         }
     },
+    css: ["~/assets/scss/index.scss"],
+    typescript: {
+        strict: true,
+        shim: false
+    },
     modules: [
-        "@element-plus/nuxt"
+        "@element-plus/nuxt",
+        "@vueuse/nuxt"
     ],
     elementPlus: {
-        importStyle: "scss"
+        importStyle: "scss",
+        themes: ["dark"]
     }
 });
