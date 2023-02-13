@@ -19,7 +19,10 @@ export default defineNuxtConfig({
             ]
         }
     },
-    css: ["~/assets/scss/index.scss"],
+    css: [
+        "@fortawesome/fontawesome-svg-core/styles.css",
+        "~/assets/scss/index.scss"
+    ],
     typescript: {
         strict: true,
         shim: false

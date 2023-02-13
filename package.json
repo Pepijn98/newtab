@@ -10,9 +10,16 @@
     "devDependencies": {
         "@element-plus/icons-vue": "^2.0.10",
         "@element-plus/nuxt": "^1.0.3",
+        "@fortawesome/fontawesome-svg-core": "^6.3.0",
+        "@fortawesome/free-brands-svg-icons": "^6.3.0",
+        "@fortawesome/free-regular-svg-icons": "^6.3.0",
+        "@fortawesome/free-solid-svg-icons": "^6.3.0",
+        "@fortawesome/vue-fontawesome": "^3.0.3",
+        "@types/markdown-it": "^12.2.3",
         "@vueuse/core": "^9.12.0",
         "@vueuse/nuxt": "^9.12.0",
         "element-plus": "^2.2.29",
+        "markdown-it": "^13.0.1",
         "nuxt": "^3.1.2",
         "sass": "^1.58.0"
     }
