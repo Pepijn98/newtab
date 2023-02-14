@@ -1,17 +1,19 @@
 <template>
     <el-container>
         <div class="grid">
-            <div class="item item_1 md-container">
+            <div ref="mdContainer" class="item item_1 md-container">
                 <div class="md-text">
-                    <div class="md md__view" v-html="$mdRenderer.render(markdown)"></div>
-                    <textarea class="md md__edit" name="notes" style="display: none"></textarea>
+                    <div ref="mdView" class="md md__view" v-html="$mdRenderer.render(markdown)"></div>
+                    <textarea ref="mdEdit" class="md md__edit hidden" name="notes" @focusin="focused(true)"
+                        @focusout="focused(false)"></textarea>
                 </div>
                 <div class="md-button-group">
-                    <el-button class="md-button md-button__edit" type="primary" :on-click="edit" circle>
+                    <el-button ref="btnEdit" class="md-button md-button__edit" type="primary" @click.native="edit"
+                        circle>
                         <FAIcon icon="fa-solid fa-pen-to-square" size="lg" />
                     </el-button>
-                    <el-button class="md-button md-button__save" type="primary" style="display: none" :on-click="save"
-                        circle>
+                    <el-button ref="btnSave" class="md-button md-button__save hidden" type="primary"
+                        @click.native="save" circle>
                         <FAIcon icon="fa-solid fa-floppy-disk" size="lg" />
                     </el-button>
                 </div>
@@ -56,9 +58,18 @@
 </template>
 
 <script setup lang="ts">
-import { useDark } from "@vueuse/core";
+interface HTMLElementRef<T> {
+    ref: T;
+    [x: string]: any;
+}
 
-useDark();
+const mdContainer = ref<HTMLDivElement>();
+const mdEdit = ref<HTMLTextAreaElement>();
+const mdView = ref<HTMLDivElement>();
+
+// Buttons need `.ref` to access the actual html element probably because it's an element-plus component
+const btnEdit = ref<HTMLElementRef<HTMLButtonElement>>();
+const btnSave = ref<HTMLElementRef<HTMLButtonElement>>();
 
 const markdown = `
 # New World
@@ -75,15 +86,35 @@ const markdown = `
     - Corrupted Portals
 `;
 
-async function edit() {
-    // TODO: Hide `md__view` and show `md__edit`
-    // Load data from `browser.storage.sync`
+function focused(isActive: boolean) {
+    if (mdContainer.value) {
+        isActive ? mdContainer.value.classList.add("focused") : mdContainer.value.classList.remove("focused");
+    }
 }
 
-async function save() {
-    // TODO: Hide `md__edit` and show `md__view`
-    // Load new markdown into `md__view`
-    // Save new markdown to `localStorage` and `browser.storage.sync`
+function edit() {
+    if (btnEdit.value && btnSave.value && mdEdit.value && mdView.value) {
+        btnEdit.value.ref.classList.add("hidden");
+        btnSave.value.ref.classList.remove("hidden");
+        mdEdit.value.classList.remove("hidden");
+        mdView.value.classList.add("hidden");
+
+
+        // TODO: Load data from `browser.storage.sync`
+    }
+}
+
+function save() {
+    if (btnEdit.value && btnSave.value && mdEdit.value && mdView.value) {
+        btnEdit.value.ref.classList.remove("hidden");
+        btnSave.value.ref.classList.add("hidden");
+        mdEdit.value.classList.add("hidden");
+        mdView.value.classList.remove("hidden");
+
+
+        // TODO: Load new markdown into `mdView`
+        // Save new markdown to `localStorage` and `browser.storage.sync`
+    }
 }
 </script>
 
@@ -115,9 +146,23 @@ async function save() {
             font-size: larger;
 
             .md-text {
+                height: 100%;
+                width: 100%;
                 grid-column-start: 1;
                 grid-row-start: 1;
                 place-self: start;
+
+                .md__edit {
+                    color: #fff;
+                    background-color: transparent;
+                    width: 99%;
+                    height: 92%;
+                    resize: none;
+                    outline: none;
+                    border: none;
+                    font-size: 18px;
+                    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, .3);
+                }
             }
 
             .md-button-group {
