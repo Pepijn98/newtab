@@ -1,63 +1,66 @@
 <template>
     <el-container>
         <div class="grid">
-            <div ref="mdContainer" class="item item_1 md-container">
+            <div ref="mdContainer" class="item md-container">
                 <div class="md-text">
                     <div ref="mdView" class="md md__view" v-html="$mdRenderer.render(markdown)"></div>
                     <textarea ref="mdEdit" class="md md__edit hidden" name="notes" @focusin="focused(true)"
                         @focusout="focused(false)"></textarea>
                 </div>
                 <div class="md-button-group">
-                    <el-button ref="btnEdit" class="md-button md-button__edit" type="primary" @click.native="edit"
-                        circle>
+                    <el-button ref="btnEdit" class="md-button md-button__edit" type="primary" @click.native="edit" circle>
                         <FAIcon icon="fa-solid fa-pen-to-square" size="lg" />
                     </el-button>
-                    <el-button ref="btnSave" class="md-button md-button__save hidden" type="primary"
-                        @click.native="save" circle>
+                    <el-button ref="btnSave" class="md-button md-button__save hidden" type="primary" @click.native="save"
+                        circle>
                         <FAIcon icon="fa-solid fa-floppy-disk" size="lg" />
                     </el-button>
                 </div>
             </div>
 
-            <a href="https://www.youtube.com" class="item item_2 link youtube">
+            <a href="https://www.youtube.com" class="item link youtube">
                 <i class="fab fa-youtube"></i>
             </a>
-            <a href="https://www.twitch.tv/directory/following/live" class="item item_3 link twitch">
+            <a href="https://www.twitch.tv/directory/following/live" class="item link twitch">
                 <i class="fab fa-twitch"></i>
             </a>
-            <a href="https://twitter.com" class="item item_4 link twitter">
+            <a href="https://twitter.com" class="item link twitter">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a href="https://www.reddit.com" class="item item_5 link reddit">
+            <a href="https://www.reddit.com" class="item link reddit">
                 <i class="fab fa-reddit-alien"></i>
             </a>
-            <a href="https://nyaa.si" class="item item_6 link nyaa">
+            <a href="https://nyaa.si" class="item link nyaa">
                 <i class="fas fa-box-archive"></i>
             </a>
-            <a href="https://www.livechart.me" class="item item_7 link livechart">
+            <a href="https://www.livechart.me" class="item link livechart">
                 <i class="fas fa-chart-area"></i>
             </a>
-            <a href="https://anilist.co" class="item item_8 link anilist">
+            <a href="https://anilist.co" class="item link anilist">
                 <img title="AL" src="https://anilist.co/img/icons/icon.svg" />
             </a>
-            <a href="https://subsplease.org" class="item item_9 link subsplease">
+            <a href="https://subsplease.org" class="item link subsplease">
                 <b>SP</b>
             </a>
-            <a href="https://github.com" class="item item_10 link github">
+            <a href="https://github.com" class="item link github">
                 <i class="fab fa-github"></i>
             </a>
-            <a href="https://stackoverflow.com" class="item item_11 link stackoverflow">
+            <a href="https://stackoverflow.com" class="item link stackoverflow">
                 <i class="fab fa-stack-overflow"></i>
             </a>
-            <a href="https://dev.to" class="item item_12 link dev">
+            <a href="https://dev.to" class="item link dev">
                 <i class="fab fa-dev"></i>
             </a>
             <!-- <a href="#" class="item item_13"></a> -->
         </div>
-    </el-container>
+</el-container>
 </template>
 
 <script setup lang="ts">
+import { useDark } from "@vueuse/core";
+
+useDark();
+
 interface HTMLElementRef<T> {
     ref: T;
     [x: string]: any;
@@ -137,6 +140,7 @@ function save() {
         border-radius: 20px;
 
         &.md-container {
+            grid-area: 1 / 1 / 5 / 3;
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             grid-template-rows: repeat(1, 1fr);
@@ -194,54 +198,88 @@ function save() {
             }
         }
 
-        // Markdown
-        &_1 {
-            grid-area: 1 / 1 / 5 / 3;
-        }
-
         // All buttons
-        &_2 {
+        &.youtube {
             grid-area: 1 / 3 / 2 / 4;
+            box-shadow: 0px 0px 8px 4px rgba(255, 0, 0, .08);
+            border: 1px solid rgba(255, 0, 0, .12);
+            color: rgba(255, 0, 0, 1);
         }
 
-        &_3 {
+        &.twitch {
             grid-area: 1 / 4 / 2 / 5;
+            box-shadow: 0px 0px 8px 4px rgba(145, 71, 255, .08);
+            border: 1px solid rgba(145, 71, 255, .12);
+            color: rgba(145, 71, 255, 1);
         }
 
-        &_4 {
+        &.twitter {
             grid-area: 1 / 5 / 2 / 6;
+            box-shadow: 0px 0px 8px 4px rgba(8, 160, 233, .08);
+            border: 1px solid rgba(8, 160, 233, .12);
+            color: rgba(8, 160, 233, 1);
         }
 
-        &_5 {
+        &.reddit {
             grid-area: 2 / 3 / 3 / 4;
+            box-shadow: 0px 0px 8px 4px rgba(255, 69, 0, .08);
+            border: 1px solid rgba(255, 69, 0, .12);
+            color: rgba(255, 69, 0, 1);
         }
 
-        &_6 {
+        &.nyaa {
             grid-area: 2 / 4 / 3 / 5;
+            box-shadow: 0px 0px 8px 4px rgba(255, 183, 197, .08);
+            border: 1px solid rgba(255, 183, 197, .12);
+            color: rgba(255, 183, 197, 1);
         }
 
-        &_7 {
+        &.livechart {
             grid-area: 2 / 5 / 3 / 6;
+            box-shadow: 0px 0px 8px 4px rgba(59, 151, 252, .08);
+            border: 1px solid rgba(59, 151, 252, .12);
+            color: rgba(59, 151, 252, 1);
         }
 
-        &_8 {
+        &.anilist {
             grid-area: 3 / 3 / 4 / 4;
+            box-shadow: 0px 0px 8px 4px rgba(2, 169, 255, .08);
+            border: 1px solid rgba(2, 169, 255, .12);
+            color: rgba(2, 169, 255, 1);
+
+            img {
+                height: 50px;
+                width: 50px;
+            }
         }
 
-        &_9 {
+        &.subsplease {
             grid-area: 3 / 4 / 4 / 5;
+            box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, .32);
+            border: 1px solid rgba(0, 0, 0, .12);
+            color: rgba(255, 255, 255, 1);
+            text-decoration: none;
         }
 
-        &_10 {
+        &.github {
             grid-area: 3 / 5 / 4 / 6;
+            box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, .32);
+            border: 1px solid rgba(0, 0, 0, .12);
+            color: rgba(255, 255, 255, 1);
         }
 
-        &_11 {
+        &.stackoverflow {
             grid-area: 4 / 3 / 5 / 4;
+            box-shadow: 0px 0px 8px 4px rgba(239, 130, 54, .08);
+            border: 1px solid rgba(239, 130, 54, .12);
+            color: rgba(239, 130, 54, 1);
         }
 
-        &_12 {
+        &.dev {
             grid-area: 4 / 4 / 5 / 5;
+            box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, .32);
+            border: 1px solid rgba(0, 0, 0, .12);
+            color: rgba(255, 255, 255, 1);
         }
 
         // &_13 {
