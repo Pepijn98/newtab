@@ -9,6 +9,7 @@ _Probably works on most browsers, only tested on edge and firefox_
 - ? Change scale when hovering over a bookmark
 
 ## About
+2.0 is still a WIP, only previous versions are currently available to download. \
 A simplistic new tab page with my most used bookmarks. \
 Feel free to clone, fork and modify however you want.
 
