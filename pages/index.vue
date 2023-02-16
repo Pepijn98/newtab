@@ -3,16 +3,15 @@
         <div class="grid">
             <div ref="mdContainer" class="item md-container">
                 <div class="md-text">
-                    <div ref="mdView" class="md md__view" v-html="$mdRenderer.render(markdown)"></div>
-                    <textarea ref="mdEdit" class="md md__edit hidden" name="notes" @focusin="focused(true)"
-                        @focusout="focused(false)"></textarea>
+                    <div ref="mdView" class="md md__view"></div>
+                    <textarea ref="mdEdit" class="md md__edit hidden" name="notes" wrap="off" @focusin="focused(true)"
+                        @focusout="focused(false)" @keydown="tabToSpaces"></textarea>
                 </div>
                 <div class="md-button-group">
-                    <el-button ref="btnEdit" class="md-button md-button__edit" type="primary" @click.native="edit" circle>
+                    <el-button ref="btnEdit" class="md-button md-button__edit" type="primary" @click="edit" circle>
                         <FAIcon icon="fa-solid fa-pen-to-square" size="lg" />
                     </el-button>
-                    <el-button ref="btnSave" class="md-button md-button__save hidden" type="primary" @click.native="save"
-                        circle>
+                    <el-button ref="btnSave" class="md-button md-button__save hidden" type="primary" @click="save" circle>
                         <FAIcon icon="fa-solid fa-floppy-disk" size="lg" />
                     </el-button>
                 </div>
@@ -59,12 +58,13 @@
 <script setup lang="ts">
 import { useDark } from "@vueuse/core";
 
-useDark();
-
 interface HTMLElementRef<T> {
     ref: T;
     [x: string]: any;
 }
+
+// Use dark mode by default
+useDark();
 
 const mdContainer = ref<HTMLDivElement>();
 const mdEdit = ref<HTMLTextAreaElement>();
@@ -74,49 +74,79 @@ const mdView = ref<HTMLDivElement>();
 const btnEdit = ref<HTMLElementRef<HTMLButtonElement>>();
 const btnSave = ref<HTMLElementRef<HTMLButtonElement>>();
 
-const markdown = `
-# New World
+// Set markdown when page loaded
+onMounted(() => {
+    if (mdView.value && mdEdit.value) {
+        const notes = localStorage.getItem("notes") || "";
+        // const data = await browser.storage.sync.get();
+        // data?.notes || "";
 
-### Gypsum Orbs
-1. Topaz Gypsum(10)
-2. Obsidian Gypsum(3)
-    - Go to Skysong Crypt
-3. Emerald Gypsum(1)
-    - Aptitude reward(skinning, fishing)
-4. Diamond Gypsum(3)
-    - Any resource gathering
-5. Amethyst Gypsum(7)
-    - Corrupted Portals
-`;
+        const html = marked.parse(notes);
+        const sanitized = DOMPurify.sanitize(html);
+        mdView.value.innerHTML = sanitized;
+    }
+});
 
+/**
+ * Add 4 spaces when tab is pressed
+ */
+function tabToSpaces(e: KeyboardEvent) {
+    if (e.key === "Tab" && e.target) {
+        e.preventDefault();
+
+        const target = e.target as HTMLTextAreaElement;
+        const start = target.selectionStart;
+        const end = target.selectionEnd;
+        target.value = target.value.substring(0, start) + "    " + target.value.substring(end);
+        target.selectionStart = target.selectionEnd = start + 4;
+    }
+}
+
+/**
+ * Show outline on md-container when the textarea is focused
+ *
+ * @param isActive Whether textarea is active or not
+ */
 function focused(isActive: boolean) {
     if (mdContainer.value) {
         isActive ? mdContainer.value.classList.add("focused") : mdContainer.value.classList.remove("focused");
     }
 }
 
+/**
+ * Show textarea to edit markdown
+ */
 function edit() {
     if (btnEdit.value && btnSave.value && mdEdit.value && mdView.value) {
+        // const data = await browser.storage.sync.get();
+        // mdEdit.value.value = data?.notes || "";
+
+        const notes = localStorage.getItem("notes");
+        mdEdit.value.value = notes || "";
+
         btnEdit.value.ref.classList.add("hidden");
         btnSave.value.ref.classList.remove("hidden");
         mdEdit.value.classList.remove("hidden");
         mdView.value.classList.add("hidden");
-
-
-        // TODO: Load data from `browser.storage.sync`
     }
 }
 
+/**
+ * Save markdown and show it
+ */
 function save() {
     if (btnEdit.value && btnSave.value && mdEdit.value && mdView.value) {
+        const html = marked.parse(mdEdit.value.value);
+        const sanitized = DOMPurify.sanitize(html);
+        mdView.value.innerHTML = sanitized;
+
+        localStorage.setItem("notes", mdEdit.value.value);
+        // browser.storage.sync.set({ notes: mdEdit.value.value });
+
         btnEdit.value.ref.classList.remove("hidden");
         btnSave.value.ref.classList.add("hidden");
         mdEdit.value.classList.add("hidden");
         mdView.value.classList.remove("hidden");
-
-
-        // TODO: Load new markdown into `mdView`
-        // Save new markdown to `localStorage` and `browser.storage.sync`
     }
 }
 </script>

@@ -12,8 +12,11 @@ export default defineNuxtConfig({
                 { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
                 { rel: "stylesheet", href: "https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css" }
             ],
-            style: [],
-            script: [],
+            script: [
+                { src: "libs/polyfill/browser-polyfill.min.js" },
+                { src: "libs/dompurify/purify.min.js" },
+                { src: "libs/marked/marked.min.js" }
+            ],
             noscript: [
                 { children: "JavaScript is required" }
             ]

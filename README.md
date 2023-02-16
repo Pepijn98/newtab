@@ -2,9 +2,14 @@
 A clean personal new tab page \
 _Probably works on most browsers, only tested on edge and firefox_
 
+## TODO
+- Change `localStorage` to `browser.storage` for extension
+- Add date/time somewhere (Small text top left maybe)
+- ? Increase grid spacing
+- ? Change scale when hovering over a bookmark
+
 ## About
 A simplistic new tab page with my most used bookmarks. \
-Inspired by [Styleads/homless](https://github.com/Styleads/homless), took their layout idea and made it more responsive for smaller windows etc. \
 Feel free to clone, fork and modify however you want.
 
 ## Install
@@ -20,4 +25,4 @@ Firefox users should use the signed `.xpi`
     3. Accept prompt
 
 ## Preview
-<img width="1024px" src="https://b.catgirlsare.sexy/7hNsW51-vtW0.jpg">
+<img width="1024px" src="https://b.catgirlsare.sexy/4eitX03Mhgj_.png">
