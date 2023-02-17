@@ -1,4 +1,4 @@
-export { };
+export {};
 declare global {
     interface Marked {
         parse(md: string): string;

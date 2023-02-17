@@ -52,7 +52,7 @@
             </a>
             <!-- <a href="#" class="item item_13"></a> -->
         </div>
-</el-container>
+    </el-container>
 </template>
 
 <script setup lang="ts">
@@ -63,8 +63,18 @@ interface HTMLElementRef<T> {
     [x: string]: any;
 }
 
+// TODO: Remove
+// Temporary for non-extension testing
+window.browser = {} as any;
+window.chrome = {} as any;
+
 // Use dark mode by default
 useDark();
+
+const { $marked, $dompurify } = useNuxtApp();
+
+// Firefox pretty much the only browser that doesn't use chromium
+const ctx = navigator.userAgent.toLowerCase().includes("firefox") ? browser : chrome;
 
 const mdContainer = ref<HTMLDivElement>();
 const mdEdit = ref<HTMLTextAreaElement>();
@@ -74,15 +84,29 @@ const mdView = ref<HTMLDivElement>();
 const btnEdit = ref<HTMLElementRef<HTMLButtonElement>>();
 const btnSave = ref<HTMLElementRef<HTMLButtonElement>>();
 
-// Set markdown when page loaded
-onMounted(() => {
-    if (mdView.value && mdEdit.value) {
-        const notes = localStorage.getItem("notes") || "";
-        // const data = await browser.storage.sync.get();
-        // data?.notes || "";
+async function getNotes(): Promise<string> {
+    // Get notes from extension storage if available
+    if (ctx && ctx.storage) {
+        const data = await ctx.storage.sync.get("notes");
+        return data?.notes ? data.notes : localStorage.getItem("notes");
+    }
+    return localStorage.getItem("notes") || "";
+}
 
-        const html = marked.parse(notes);
-        const sanitized = DOMPurify.sanitize(html);
+async function saveNotes(notes: string): Promise<void> {
+    // Save notes to extension storage if available
+    if (ctx && ctx.storage) {
+        await ctx.storage.sync.set({ notes });
+    }
+    localStorage.setItem("notes", notes);
+}
+
+// Set markdown when page loaded
+onMounted(async () => {
+    if (mdView.value && mdEdit.value) {
+        const notes = await getNotes();
+        const html = $marked.parse(notes);
+        const sanitized = $dompurify.sanitize(html);
         mdView.value.innerHTML = sanitized;
     }
 });
@@ -90,7 +114,7 @@ onMounted(() => {
 /**
  * Add 4 spaces when tab is pressed
  */
-function tabToSpaces(e: KeyboardEvent) {
+function tabToSpaces(e: KeyboardEvent): void {
     if (e.key === "Tab" && e.target) {
         e.preventDefault();
 
@@ -107,7 +131,7 @@ function tabToSpaces(e: KeyboardEvent) {
  *
  * @param isActive Whether textarea is active or not
  */
-function focused(isActive: boolean) {
+function focused(isActive: boolean): void {
     if (mdContainer.value) {
         isActive ? mdContainer.value.classList.add("focused") : mdContainer.value.classList.remove("focused");
     }
@@ -116,13 +140,10 @@ function focused(isActive: boolean) {
 /**
  * Show textarea to edit markdown
  */
-function edit() {
+async function edit(): Promise<void> {
     if (btnEdit.value && btnSave.value && mdEdit.value && mdView.value) {
-        // const data = await browser.storage.sync.get();
-        // mdEdit.value.value = data?.notes || "";
-
-        const notes = localStorage.getItem("notes");
-        mdEdit.value.value = notes || "";
+        const notes = await getNotes();
+        mdEdit.value.value = notes;
 
         btnEdit.value.ref.classList.add("hidden");
         btnSave.value.ref.classList.remove("hidden");
@@ -134,14 +155,13 @@ function edit() {
 /**
  * Save markdown and show it
  */
-function save() {
+async function save(): Promise<void> {
     if (btnEdit.value && btnSave.value && mdEdit.value && mdView.value) {
-        const html = marked.parse(mdEdit.value.value);
-        const sanitized = DOMPurify.sanitize(html);
+        const html = $marked.parse(mdEdit.value.value);
+        const sanitized = $dompurify.sanitize(html);
         mdView.value.innerHTML = sanitized;
 
-        localStorage.setItem("notes", mdEdit.value.value);
-        // browser.storage.sync.set({ notes: mdEdit.value.value });
+        await saveNotes(sanitized);
 
         btnEdit.value.ref.classList.remove("hidden");
         btnSave.value.ref.classList.add("hidden");
@@ -178,6 +198,7 @@ function save() {
             border: 1px solid rgba(0, 0, 0, .12);
             padding: 10px;
             font-size: larger;
+            color: beige;
 
             .md-text {
                 height: 100%;

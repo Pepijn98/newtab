@@ -13,9 +13,7 @@ export default defineNuxtConfig({
                 { rel: "stylesheet", href: "https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css" }
             ],
             script: [
-                { src: "libs/polyfill/browser-polyfill.min.js" },
-                { src: "libs/dompurify/purify.min.js" },
-                { src: "libs/marked/marked.min.js" }
+                { src: "https://unpkg.com/webextension-polyfill@latest/dist/browser-polyfill.min.js" }
             ],
             noscript: [
                 { children: "JavaScript is required" }
@@ -35,7 +33,6 @@ export default defineNuxtConfig({
         "@vueuse/nuxt"
     ],
     elementPlus: {
-        importStyle: "scss",
-        themes: ["dark"]
+        importStyle: "scss"
     }
 });

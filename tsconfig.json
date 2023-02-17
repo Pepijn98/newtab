@@ -2,8 +2,16 @@
     // https://nuxt.com/docs/guide/concepts/typescript
     "extends": "./.nuxt/tsconfig.json",
     "compilerOptions": {
+        "types": [
+            "chrome",
+            "firefox-webext-browser",
+            "node"
+        ],
         "typeRoots": [
-            "./@types"
+            "@types"
+        ],
+        "lib": [
+            "DOM"
         ]
     }
 }

@@ -14,3 +14,13 @@ body,
 .hidden {
     display: none !important;
 }
+
+a:link,
+a:visited {
+    color: #0066cc;
+}
+
+a:hover,
+a:active {
+    color: lighten($color: #0066cc, $amount: 10);
+}
