@@ -4,9 +4,9 @@ _Probably works on most browsers, only tested on edge and firefox_
 
 ## TODO
 - ~~Change `localStorage` to `browser.storage` for extension~~
-- Add date/time somewhere (Small text top left maybe)
-- ? Increase grid spacing
-- ? Change scale when hovering over a bookmark
+- ~~Add date/time somewhere (Small text top left maybe)~~
+- ~~? Increase grid spacing~~
+- ~~? Change scale when hovering over a bookmark~~
 
 ## About
 2.0 is still a WIP, only previous versions are currently available to download. \
