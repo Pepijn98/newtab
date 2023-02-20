@@ -106,11 +106,11 @@ async function saveNotes(notes: string): Promise<void> {
 function showTime(): void {
     const d = new Date();
 
-    let today = d.toLocaleString("en", { weekday: "long" });
-    let hour = d.toLocaleString("pl", { hour: "2-digit" }); // use 24h time format
+    const today = d.toLocaleString("en", { weekday: "long" });
+    const hour = d.toLocaleString("pl", { hour: "2-digit" }); // use 24h time format
     let minute = d.toLocaleString("en", { minute: "2-digit" });
-    let day = d.toLocaleString("en", { day: "2-digit" });
-    let month = d.toLocaleString("en", { month: "long" });
+    const day = d.toLocaleString("en", { day: "2-digit" });
+    const month = d.toLocaleString("en", { month: "long" });
     minute = addZero(minute);
 
 
@@ -210,10 +210,12 @@ async function save(): Promise<void> {
     }
 
     .time {
+        font-weight: bold;
         font-size: 2em;
     }
 
     .date {
+        font-weight: 600;
         font-size: 1.2em;
     }
 }
