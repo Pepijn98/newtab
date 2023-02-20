@@ -1,5 +1,9 @@
 <template>
     <el-container>
+        <div class="dt-container">
+            <p ref="time" class="time">Loading...</p>
+            <p ref="date" class="date"></p>
+        </div>
         <div class="grid">
             <div ref="mdContainer" class="item md-container">
                 <div class="md-text">
@@ -63,18 +67,16 @@ interface HTMLElementRef<T> {
     [x: string]: any;
 }
 
-// TODO: Remove
-// Temporary for non-extension testing
-window.browser = {} as any;
-window.chrome = {} as any;
-
 // Use dark mode by default
 useDark();
 
 const { $marked, $dompurify } = useNuxtApp();
 
 // Firefox pretty much the only browser that doesn't use chromium
-const ctx = navigator.userAgent.toLowerCase().includes("firefox") ? browser : chrome;
+const ctx = navigator.userAgent.toLowerCase().includes("firefox") ? window.browser : window.chrome;
+
+const time = ref<HTMLHeadingElement>();
+const date = ref<HTMLHeadingElement>();
 
 const mdContainer = ref<HTMLDivElement>();
 const mdEdit = ref<HTMLTextAreaElement>();
@@ -101,6 +103,30 @@ async function saveNotes(notes: string): Promise<void> {
     localStorage.setItem("notes", notes);
 }
 
+function showTime(): void {
+    const d = new Date();
+
+    let today = d.toLocaleString("en", { weekday: "long" });
+    let hour = d.toLocaleString("pl", { hour: "2-digit" }); // use 24h time format
+    let minute = d.toLocaleString("en", { minute: "2-digit" });
+    let day = d.toLocaleString("en", { day: "2-digit" });
+    let month = d.toLocaleString("en", { month: "long" });
+    minute = addZero(minute);
+
+
+    if (time.value && date.value) {
+        time.value.innerHTML = `${hour}:${minute}`;
+        date.value.innerHTML = `${today}, ${day} ${month}`;
+    }
+
+    setTimeout(showTime, 0);
+}
+
+function addZero(i: string): string {
+    if (i.length < 2) i = "0" + i;
+    return i;
+}
+
 // Set markdown when page loaded
 onMounted(async () => {
     if (mdView.value && mdEdit.value) {
@@ -109,6 +135,8 @@ onMounted(async () => {
         const sanitized = $dompurify.sanitize(html);
         mdView.value.innerHTML = sanitized;
     }
+
+    showTime();
 });
 
 /**
@@ -161,7 +189,7 @@ async function save(): Promise<void> {
         const sanitized = $dompurify.sanitize(html);
         mdView.value.innerHTML = sanitized;
 
-        await saveNotes(sanitized);
+        await saveNotes(mdEdit.value.value);
 
         btnEdit.value.ref.classList.remove("hidden");
         btnSave.value.ref.classList.add("hidden");
@@ -172,14 +200,32 @@ async function save(): Promise<void> {
 </script>
 
 <style lang="scss">
+.dt-container {
+    width: 90%;
+    margin: 15px auto;
+    color: beige;
+
+    > * {
+        margin: 0px;
+    }
+
+    .time {
+        font-size: 2em;
+    }
+
+    .date {
+        font-size: 1.2em;
+    }
+}
+
 .grid {
     height: 80%;
     width: 90%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
 
     position: absolute;
     top: 50%;
@@ -235,6 +281,7 @@ async function save(): Promise<void> {
         &.link {
             display: grid;
             text-decoration: none;
+            transition: 0.25s;
 
             // Center FA icons/text
             i,
@@ -246,6 +293,10 @@ async function save(): Promise<void> {
             // Center image
             img {
                 margin: auto;
+            }
+
+            &:hover {
+                transform: scale(1.05);
             }
         }
 

@@ -3,7 +3,7 @@ A clean personal new tab page \
 _Probably works on most browsers, only tested on edge and firefox_
 
 ## TODO
-- Change `localStorage` to `browser.storage` for extension
+- ~~Change `localStorage` to `browser.storage` for extension~~
 - Add date/time somewhere (Small text top left maybe)
 - ? Increase grid spacing
 - ? Change scale when hovering over a bookmark
