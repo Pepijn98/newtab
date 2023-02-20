@@ -28,4 +28,4 @@ Firefox users should use the signed `.xpi`
     3. Accept prompt
 
 ## Preview
-<img width="1024px" src="https://b.catgirlsare.sexy/4eitX03Mhgj_.png">
+<img width="1024px" src="https://files.catbox.moe/agemcs.png">
