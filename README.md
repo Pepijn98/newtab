@@ -3,6 +3,8 @@ A clean personal new tab page \
 _Probably works on most browsers, only tested on edge and firefox_
 
 ## TODO
+- Add browser specific manifests
+- Add build script
 - ~~Change `localStorage` to `browser.storage` for extension~~
 - ~~Add date/time somewhere (Small text top left maybe)~~
 - ~~? Increase grid spacing~~
